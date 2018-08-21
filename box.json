@@ -1,0 +1,15 @@
+{
+    "dependencies":{
+        "coldbox":"^5.1.4+741",
+        "wirebox":"^5.1.4+741"
+    },
+    "installPaths":{
+        "coldbox":"coldbox",
+        "wirebox":"wirebox"
+    },
+    "name":"My ColdBox App",
+    "slug":"my-coldbox-ap",
+    "version":"1.0.0",
+    "location":"",
+    "scripts":{}
+}
