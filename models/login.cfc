@@ -22,11 +22,13 @@ component accessors="true"{
 					login=false;
 				}
 			else{
+
 					updateSessionId=queryExecute("UPDATE AccountDetails SET SessionId = :sess
 							   					  WHERE EmailId= :emailId
 							  	 				  OR UserName= :userName",{sess={value=session.sessionId,cfSqlType="cf_sql_varchar"},
 							  	 				  						   emailId={value=arguments.emailOrUserName,cfSqlType="cf_sql_varchar"},
 								  	 			 						   userName={value=arguments.emailOrUserName,cfSqlType="cf_sql_varchar"}});
+
 
 					collectUserDetails=queryExecute("SELECT AccountId,UserName,ImagePath,PasswordHash
 								  FROM AccountDetails

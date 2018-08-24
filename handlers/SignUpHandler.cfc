@@ -1,6 +1,4 @@
-/**
-* I am a new handler
-*/
+
 component{
 	property name="signUpServiceObj" inject="signUpService";
 
@@ -11,7 +9,7 @@ component{
 			event.setView( "SignUpHandler/signUp" );
 		}
 		else{
-			relocate(event="?main/index" , queryString="signUp=false", baseURL=baseUrl);
+			runEvent( event= 'main.signUpUnsuccessfull', eventArguments= { signUp=false });
 		}
 	}
 

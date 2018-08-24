@@ -10,7 +10,7 @@ component{
 		}
 		else{
 			 //event.setView("main/index"); // pass a message enter correct username or password
-			relocate(event="?main/index" , queryString="login=false", baseURL=baseUrl);
+			runEvent( event= 'main.loginUnsuccessfull', eventArguments= { login=false });
 		}
 
 	}
@@ -19,10 +19,10 @@ component{
 		var baseUrl=event.getHTMLBaseURL();
 		logoutSuccess=loginServiceObj.logoutUser();
 		if(logoutSuccess){
-			relocate(event="?main/index" , queryString="logout=true", baseURL=baseUrl);
+			runEvent( event= 'main.loggedOut', eventArguments= { logout=true });
 		}
 		else{
-			relocate(event="?main/index" , queryString="logout=false", baseURL=baseUrl);
+			runEvent( event= 'main.loggedOut', eventArguments= { logout=false });
 		}
 
 	}

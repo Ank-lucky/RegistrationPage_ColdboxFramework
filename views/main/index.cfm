@@ -283,10 +283,36 @@
 		</script>
 </body>
 </html>
-
-<!--- <cfif url.event EQ "login"> --->
-<!--- 	<cfoutput>hiiii</cfoutput> --->
-<!--- </cfif> --->
-<!--- <cfif isDefined(#encodeForHTML( rc.login )#) > --->
-<!--- 	<cfoutput>hiiii</cfoutput> --->
-<!--- </cfif> --->
+<cfif structKeyExists(rc,"login")>
+	<cfif rc.login EQ false>
+			<script>
+			<cfoutput>
+			document.getElementById("message").innerHTML="Sorry,couldn't login because you have entered wrong username/password or someone in here is already logged in.";
+			</cfoutput>
+		</script>
+	</cfif>
+</cfif>
+<cfif structKeyExists(rc,"logout")>
+	<cfif rc.logout EQ "true">
+			<script>
+			<cfoutput>
+			document.getElementById("message").innerHTML="Thanx for using Letz Chat!.";
+			</cfoutput>
+			</script>
+	<cfelse>
+		<script>
+			<cfoutput>
+			document.getElementById("message").innerHTML="Sorry, couldn't logout successfully..";
+			</cfoutput>
+		</script>
+	</cfif>
+</cfif>
+<cfif structKeyExists(rc,"signUp")>
+	<cfif rc.signUp EQ "false">
+			<script>
+			<cfoutput>
+			document.getElementById("message").innerHTML="Sorry,couldn't sign up.Please try again..";
+			</cfoutput>
+			</script>
+	</cfif>
+</cfif>

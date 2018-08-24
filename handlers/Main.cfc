@@ -5,6 +5,18 @@ component extends="coldbox.system.EventHandler"{
 		event.setView("main/index");
 
 	}
+	function loginUnsuccessfull(event,rc,prc,login=false){
+		rc.login=login;
+		event.setView("main/index");
+	}
+	function loggedOut(event,rc,prc,logout){
+		rc.logout=logout;
+		event.setView("main/index");
+	}
+	function signUpUnsuccessfull(event,rc,prc,signUp){
+		rc.signUp=signUp;
+		event.setView("main/index");
+	}
 
 	function onSessionEnd( event, rc, prc ){
 		var sessionScope = event.getValue("sessionReference");
