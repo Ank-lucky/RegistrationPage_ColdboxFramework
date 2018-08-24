@@ -2,31 +2,7 @@ component extends="coldbox.system.EventHandler"{
 
 	// Default Action
 	function index( event, rc, prc ){
-		//prc.welcomeMessage = "Welcome to ColdBox!";
 		event.setView("main/index");
-
-	}
-
-	// Do something
-	//function doSomething( event, rc, prc ){
-		//relocate( "main.index" );
-	//}
-
-	/************************************** IMPLICIT ACTIONS *********************************************/
-
-	function onAppInit( event, rc, prc ){
-
-	}
-
-	function onRequestStart( event, rc, prc ){
-
-	}
-
-	function onRequestEnd( event, rc, prc ){
-
-	}
-
-	function onSessionStart( event, rc, prc ){
 
 	}
 
@@ -36,16 +12,26 @@ component extends="coldbox.system.EventHandler"{
 	}
 
 	function onException( event, rc, prc ){
-		//Grab Exception From private request collection, placed by ColdBox Exception Handling
-		var exception = prc.exception;
-		//Place exception handler below:
+		var exception=prc.exception;
+		writeLog(type="Error", file="coldboxGlobalOnExceptionHandler", text=" Exception:#exception#");
+		flash.put("exceptionURL", event.getCurrentRoutedURL() );
+		relocate(event="_templates.generic_error");
 
 	}
 
 	function onMissingTemplate( event, rc, prc ){
 		//Grab missingTemplate From request collection, placed by ColdBox
 		var missingTemplate = event.getValue("missingTemplate");
+		  writeLog(type="Error", file="coldboxonMissingTemplate", text="Missing template #missingTemplate#" );
+	      event.renderData( data="<h1>Sorry, the page you requested was Not Found!</h1>", statusCode=404 );
+	      //event.setView( "_templates.404" ).setHTTPHeader( "404", "Page Not Found" );
 
 	}
+	function pageNotFound(event,rc,prc){
+
+	    writeLog(type="Error", file="coldboxPageNotFoundHandler" , text="Invalid page detected" );
+	    event.renderData( data="<h1>Sorry, the page you requested was Not Found!</h1>", statusCode=404 );
+	   // event.setView( "_templates.404" ).setHTTPHeader( "404", "Page Not Found" );
+}
 
 }

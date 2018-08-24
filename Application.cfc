@@ -4,6 +4,17 @@ component{
 	this.name = hash( getCurrentTemplatePath() );
 	this.sessionManagement = true;
 	this.sessionTimeout = createTimeSpan(0,0,30,0);
+	this.dataSources={
+		ColdboxChatDb    = {
+            database    = "coldboxLetzChat",
+            host        = "ANKITAR-PC",
+            port        = "1433",
+            driver      = "MSSQLServer",
+            username    = "username",
+            password    = "password"
+        }
+	};
+	this.dataSource="ColdboxChatDb";
 	this.setClientCookies = true;
 
 	// COLDBOX STATIC PROPERTY, DO NOT CHANGE UNLESS THIS IS NOT THE ROOT OF YOUR COLDBOX APP
@@ -45,6 +56,8 @@ component{
 
 	public boolean function onMissingTemplate( template ){
 		return application.cbBootstrap.onMissingTemplate( argumentCollection=arguments );
+
 	}
+
 
 }

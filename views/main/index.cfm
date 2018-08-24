@@ -27,7 +27,7 @@
 						Log in
 					</h4>
 					<br>
-					<form action="?event=SignUp.index" method="POST"  >
+					<form action="?event=LoginHandler.index" method="POST"  >
 						<div class="row">
 							<div class="input-field">
 								<input type="text" id="login" name="EmailOrUserName" required="required" class="validate" placeholder="Email/Username">
@@ -71,7 +71,7 @@
 							Sign up
 						</h4>
 						<br>
-						<form action="#" name="signup" method="POST" onsubmit="return validate()" >
+						<form action="?event=SignUpHandler.signUp" name="signup" method="POST" onsubmit="return validate()" >
 							<div class="row">
 								<div class="input-field col s12 m6">
 									<input type="text" id="firstName" name="FirstName" class="validate"  placeholder="Enter FirstName">
@@ -283,3 +283,10 @@
 		</script>
 </body>
 </html>
+
+<!--- <cfif url.event EQ "login"> --->
+<!--- 	<cfoutput>hiiii</cfoutput> --->
+<!--- </cfif> --->
+<!--- <cfif isDefined(#encodeForHTML( rc.login )#) > --->
+<!--- 	<cfoutput>hiiii</cfoutput> --->
+<!--- </cfif> --->
