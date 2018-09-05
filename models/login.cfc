@@ -4,12 +4,8 @@ component accessors="true"{
 	//property name="chatDb" inject="coldbox:setting:ColdboxChatDb";
 	property name="lockSimultaneousUserLoginServiceObj" inject="lockSimultaneousUserLoginService";
 
-	 function init(){
-		return this;
-	}
-
 	/*function for user login */
-	function loginUser(required emailOrUsername,required passkey ){
+	public boolean function loginUser(string emailOrUsername,string passkey ){
 		var login=false;
 		var collectUserDetails= new query();
 		var updateSessionId=new query();
@@ -22,7 +18,7 @@ component accessors="true"{
 					login=false;
 				}
 			else{
-
+				transaction{
 					updateSessionId=queryExecute("UPDATE AccountDetails SET SessionId = :sess
 							   					  WHERE EmailId= :emailId
 							  	 				  OR UserName= :userName",{sess={value=session.sessionId,cfSqlType="cf_sql_varchar"},
@@ -32,13 +28,14 @@ component accessors="true"{
 
 					collectUserDetails=queryExecute("SELECT AccountId,UserName,ImagePath,PasswordHash
 								  FROM AccountDetails
-								  WHERE EmailId= :emailId
-							  	  OR UserName= :userName
+								  WHERE EmailId= :emailId COLLATE SQL_Latin1_General_CP1_CS_AS
+							  	  OR UserName= :userName COLLATE SQL_Latin1_General_CP1_CS_AS
 								  AND PasswordHash=:password
 								  And IsUserActive=1",{emailId={value=arguments.emailOrUserName,cfSqlType="cf_sql_varchar"},
 								  	 				   userName={value=arguments.emailOrUserName,cfSqlType="cf_sql_varchar"},
 								  	 				   password={value=password,cfSqlType="cf_sql_varchar"}});
 
+				} // transaction ends
 					if(collectUserDetails.recordCount == 1){
 						session.loggedInUser={'userName'=collectUserDetails.UserName,'isUserLoggedIn'=true,'userId'=collectUserDetails.AccountId};
 						login=true;
@@ -57,12 +54,13 @@ component accessors="true"{
     } /*End of loginUser()*/
 
 	/*function for logout User*/
-	function logoutUser(){
+	public boolean function logoutUser(){
 			var logout=false;
 			try{
 					clearSession=queryExecute("UPDATE AccountDetails
 											   SET SessionId=NULL
 											   WHERE AccountId= :accId",{accId={value="#Session.loggedInUser.userId#",cfSqlType="cf_sql_integer"}});
+					structDelete(session,"loggedInUser");
 					structDelete(cookie,CFID);
 					structDelete(cookie,CFTOKEN);
 					logout=true;

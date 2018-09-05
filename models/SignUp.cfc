@@ -1,12 +1,7 @@
 component accessors="true"{
 
-	/*Constructor*/
-	SignUp function init(){
-		return this;
-	}
-
 	/* signUpUser*/
-	function signUpUserAndStoreDetails(required formDetails){
+	public boolean function signUpUserAndStoreDetails(required formDetails){
 		var userAddressInfo= new query();
 		var userPersonalInfo=new query();
 		var signUpFlag=false;

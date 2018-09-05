@@ -1,15 +1,7 @@
-/**
-* I am a new Model Object
-*/
+/*Lock simultaneous user login in one sessionId*/
 component accessors="true"{
 
-	// Properties
-
-
-	/**
-	 * Constructor
-	 */
-	 function lockMutualLogin(required emailOrUserName, required password){
+	 public boolean function lockMutualLogin(required emailOrUserName, required password){
 		var lockSimultaneousUserLoginFlag=false;
 		var sessionsCount= new query();
 		try{

@@ -6,13 +6,14 @@
 		// coldbox directives
 		coldbox = {
 			//Application Setup
-			appName = 				"LetzChatColdbox",
-			implicitViews = 		 false,
-			defaultEvent  = 		"main.index",
-		    sessionEndHandler = 	"main.onSessionEnd",
-		    missingTemplateHandler= "main.onMissingTemplate",
-			exceptionHandler	  = "main.onException",
-			invalidEventHandler	  = "main.pageNotFound"
+			appName = 				 "LetzChatColdbox",
+			implicitViews = 		  false,
+			defaultEvent  = 		 "main.index",
+		    sessionEndHandler = 	 "main.onSessionEnd",
+		    missingTemplateHandler = "main.missingTemplate",
+			exceptionHandler	  =  "main.onException",
+			onInvalidEvent  = 		 "main.pageNotFound",
+			customErrorTemplate =    "/coldbox/system/includes/BugReport-public.cfm"
 		};
 		/*settings={
 		ColdboxChatDb={name="ColdboxChatDb" , type="SQLServer"}

@@ -7,7 +7,7 @@
 .input-field .prefix.active{color:#000;}
 select{display:block; border: 2px solid #85a3d8;; border-radius: 5px;}
 .ErrorMsg{font-size:1em;color:#ff0000;}
-
+.goToLoginFormLink{font-size:1.2em;}
 /* Input : switch */
 .switch{margin-top:7px;}
 .switch label .lever{margin:0 7px;}

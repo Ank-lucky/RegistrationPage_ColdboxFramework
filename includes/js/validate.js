@@ -268,11 +268,9 @@ function displayErrors(errorId, fieldId, typeOfError, firstBlankField) {
     ]
 
     let blankField = undefined;
-    console.log(errorId);
     errors.forEach(item => {
         if (item.id == fieldId) {  
             document.getElementById(errorId).innerHTML = item.error[typeOfError];
-            console.log(firstBlankField, this.firstBlankField);
             if (firstBlankField) {
                 blankField = document.getElementById(fieldId);
             }

@@ -27,10 +27,10 @@
 						Log in
 					</h4>
 					<br>
-					<form action="?event=LoginHandler.index" method="POST"  >
+					<form action="?event=LoginHandler.login" method="POST"  >
 						<div class="row">
 							<div class="input-field">
-								<input type="text" id="login" name="EmailOrUserName" required="required" class="validate" placeholder="Email/Username">
+								<input type="text" id="login" name="EmailOrUserName" required='required' class="validate" placeholder="Email/Username">
 								<label for="user">
 									<i class="material-icons">
 										person
@@ -40,7 +40,7 @@
 						</div>
 						<div class="row">
 							<div class="input-field">
-								<input type="password" id="passkey" name="Password" required="required" class="validate"  placeholder="Password">
+								<input type="password" id="passkey" name="Password" required='required' class="validate"  placeholder="Password">
 								<label for="pass">
 									<i class="material-icons">
 										lock
@@ -197,20 +197,26 @@
 								</div>
 							</div>
 							<div class="row">
+
 								<button type="submit" name="Register" class="btn blue right waves-effect waves-light" >
 									Sign Up
 								</button>
+								<div class="goToLoginForm">
+									<a class="goToLoginFormLink">LOGIN Here</a>
+								</div>
 							</div>
+
 						</form>
 					</div>
 					<div class="signup-toggle center">
 						<h4 class="center">
 							Have No Account ?
-							<a href="#">
-								Sign Up
-							</a>
+
+							<strong>Sign Up</strong>
+
 						</h4>
 					</div>
+
 				</div>
 				<div class="col s12">
 					<br>
@@ -278,6 +284,13 @@
 				$(this).hide();
 				$(".signupForm").show(300);
 				$(".policy").css("visibility","visible");
+				$(".login").hide();
+			});
+
+			$(".goToLoginFormLink").click(()=>{
+				$(".signupForm").hide();
+				$(".login").show(300);
+				$(".signup-toggle").show(300);
 			});
 			});
 		</script>

@@ -4,19 +4,10 @@ component{
 	this.name = hash( getCurrentTemplatePath() );
 	this.sessionManagement = true;
 	this.sessionTimeout = createTimeSpan(0,0,30,0);
-	this.dataSources={
-		ColdboxChatDb    = {
-            database    = "coldboxLetzChat",
-            host        = "ANKITAR-PC",
-            port        = "1433",
-            driver      = "MSSQLServer",
-            username    = "username",
-            password    = "password"
-        }
-	};
 	this.dataSource="ColdboxChatDb";
 	this.setClientCookies = true;
 
+	this.mappings['/coldbox'] = getDirectoryFromPath( getCurrentTemplatePath() ) & "coldbox";
 	// COLDBOX STATIC PROPERTY, DO NOT CHANGE UNLESS THIS IS NOT THE ROOT OF YOUR COLDBOX APP
 	COLDBOX_APP_ROOT_PATH = getDirectoryFromPath( getCurrentTemplatePath() );
 	// The web server mapping to this application. Used for remote purposes or static purposes
@@ -40,24 +31,27 @@ component{
 
 	// request start
 	public boolean function onRequestStart( string targetPage ){
-		// Process ColdBox Request
 		application.cbBootstrap.onRequestStart( arguments.targetPage );
-
+		return true;
+	}
+	public boolean function onRequestEnd( string targetPage ){
 		return true;
 	}
 
 	public void function onSessionStart(){
 		application.cbBootStrap.onSessionStart();
 	}
-
 	public void function onSessionEnd( struct sessionScope, struct appScope ){
 		arguments.appScope.cbBootStrap.onSessionEnd( argumentCollection=arguments );
 	}
-
 	public boolean function onMissingTemplate( template ){
 		return application.cbBootstrap.onMissingTemplate( argumentCollection=arguments );
 
 	}
+	public void function onError(exceptionType,exceptionEvent){
+		writeLog(type="Error",file="onErrorApplication",text="ExceptionError Type:<cfoutput>#argumnents.exceptionType#</cfoutput>");
+	}
+
 
 
 }
