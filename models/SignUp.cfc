@@ -1,15 +1,24 @@
-component accessors="true"{
+/*----------------------------------------------------------------------------->
+<!--- Component : SignUp.cfc --->
+<!--- Author 	 :	Ankita Rath --->
+<!--- Date     :	September 11, 2018 --->
+<!--- Description : Component for Signing Up a user --->
+<!-----------------------------------------------------------------------------*/
 
-	/* signUpUser*/
-	public boolean function signUpUserAndStoreDetails(required formDetails){
+/**
+ * @hint "component to Sign Up user"
+ **/
+component displayname="SignUpComponent" accessors=true{
+
+	public boolean function signUpUserAndStoreDetails(required struct formDetails)
+	description="function to insert user Details and signup" hint="signUp user"
+	{
 		var userAddressInfo= new query();
 		var userPersonalInfo=new query();
 		var signUpFlag=false;
+		var insertResult=-1;
 		var passkey=hash(arguments.formDetails.Password,"SHA1");
-		var midName=arguments.formDetails.MiddleName;
-		if(midName == ""){
-			 midName="NULL";
-		}
+
 		try{
 			transaction{
 	  			userAddressInfo=queryExecute("INSERT INTO Address(City,State,Country) VALUES(:city,:state,:country)",
@@ -19,13 +28,19 @@ component accessors="true"{
 
 	     		var datatime = createOdbcDateTime( now() );
 
-	     		userPersonalInfo=queryExecute("INSERT INTO AccountDetails (UserName,FirstName,MiddleName,LastName,IsUserActive,PasswordHash,PhoneNumber,EmailId,AddressId,ImagePath,DateofBirth,Gender,AccountCreationDate)
-	   										   VALUES(:userName,:firstName,:middleName,:lastName,:isUserActive,:passkeyHashed,:phoneNo,:email,:generatedAddressKey,:imagePath,:dob,:gender,:dateTime)",
+	     		userPersonalInfo=queryExecute("INSERT INTO AccountDetails (UserName,FirstName,MiddleName,LastName,
+	     																   IsUserActive,PasswordHash,PhoneNumber,EmailId,
+	     																   AddressId,ImagePath,DateofBirth,Gender,
+	     																   AccountCreationDate)
+	   										   VALUES(:userName,:firstName,:middleName,:lastName,:isUserActive,
+	   										   		  :passkeyHashed,:phoneNo,:email,:generatedAddressKey,:imagePath,
+	   										   		  :dob,:gender,:dateTime)",
 
 				   								{
 								   				 	userName=     {value=arguments.formDetails.UserName,cfsqltype="cf_sql_varchar"},
 									   				firstName=    {value=arguments.formDetails.FirstName, cfsqltype="cf_sql_varchar"},
-									   				middleName=   {value=midName, cfsqltype="cf_sql_varchar"},
+									   				middleName=   {value=arguments.formDetails.MiddleName, cfsqltype="cf_sql_varchar",
+									   							   null="#NOT len(arguments.formDetails.MiddleName)#"},
 									   				lastName=     {value=arguments.formDetails.LastName, cfsqltype="cf_sql_varchar"},
 									      			isUserActive= {value=1 ,cfsqltype="cf_sql_bit"},
 									      			passkeyHashed={value=passkey,cfsqltype="cf_sql_varchar"},
@@ -42,11 +57,10 @@ component accessors="true"{
 					 signUpFlag=true;
 		}
 		catch(any exception){
-			writeLog(type="Error", file="coldboxSignUpModel", text=" Exception type=#exception.type# ,Exception Message=#exception.message#");
+			writeLog(type="Error", file="my_colbox_application", text=" Exception type=#exception.type# ,Exception Message=#exception.message#");
 			signUpFlag=false;
 		}
 		return signUpFlag;
 	}/*signUpUserAndStoreDetails() ends here*/
-
 
 }

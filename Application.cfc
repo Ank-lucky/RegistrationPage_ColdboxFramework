@@ -1,4 +1,10 @@
-﻿
+﻿/*----------------------------------------------------------------------------->
+<!--- Component :  Application.cfc --->
+<!--- Author 	 :	Ankita Rath --->
+<!--- Date     :	September 11, 2018 --->
+<!--- Description : Application component--->
+<!-----------------------------------------------------------------------------*/
+
 component{
 	// Application properties
 	this.name = hash( getCurrentTemplatePath() );
@@ -31,6 +37,7 @@ component{
 
 	// request start
 	public boolean function onRequestStart( string targetPage ){
+
 		application.cbBootstrap.onRequestStart( arguments.targetPage );
 		return true;
 	}
@@ -40,6 +47,8 @@ component{
 
 	public void function onSessionStart(){
 		application.cbBootStrap.onSessionStart();
+
+
 	}
 	public void function onSessionEnd( struct sessionScope, struct appScope ){
 		arguments.appScope.cbBootStrap.onSessionEnd( argumentCollection=arguments );
@@ -48,8 +57,9 @@ component{
 		return application.cbBootstrap.onMissingTemplate( argumentCollection=arguments );
 
 	}
-	public void function onError(exceptionType,exceptionEvent){
-		writeLog(type="Error",file="onErrorApplication",text="ExceptionError Type:<cfoutput>#argumnents.exceptionType#</cfoutput>");
+	public void function onError(any exception){
+		writeLog(type="Error",file="onErrorApplication",text="ExceptionError Type:#arguments.exception.type# , Message:#arguments.exception.message#");
+		include "views/_templates/generic_error.cfm";
 	}
 
 

@@ -1,18 +1,29 @@
-/** model for login and logout*/
-component accessors="true"{
+/*----------------------------------------------------------------------------->
+<!--- Component :  Login.cfc --->
+<!--- Author 	 :	Ankita Rath --->
+<!--- Date     :	September 11, 2018 --->
+<!--- Description : Component for login and logout user--->
+<!-----------------------------------------------------------------------------*/
 
-	//property name="chatDb" inject="coldbox:setting:ColdboxChatDb";
+/**
+*  @hint "model for login and logout"
+**/
+component displayname="loginOrLogoutUserComponent" accessors=true{
+
 	property name="lockSimultaneousUserLoginServiceObj" inject="lockSimultaneousUserLoginService";
 
-	/*function for user login */
-	public boolean function loginUser(string emailOrUsername,string passkey ){
+	public boolean function loginUser(required string emailOrUsername,required string passkey )
+	description="method to login user" hint="login User"
+	{
+
 		var login=false;
 		var collectUserDetails= new query();
 		var updateSessionId=new query();
 		var password= hash(arguments.passkey,"SHA1");
 
 		/*Check for other user simultaneously logging*/
-		lockSimultaneousUserLoginServiceObjFlag=lockSimultaneousUserLoginServiceObj.lockMutualLogin(arguments.emailOrUserName,password);
+		lockSimultaneousUserLoginServiceObjFlag =
+							lockSimultaneousUserLoginServiceObj.lockMutualLogin(arguments.emailOrUserName,password);
 		try{
 			if(lockSimultaneousUserLoginServiceObjFlag == true){
 					login=false;
@@ -21,9 +32,10 @@ component accessors="true"{
 				transaction{
 					updateSessionId=queryExecute("UPDATE AccountDetails SET SessionId = :sess
 							   					  WHERE EmailId= :emailId
-							  	 				  OR UserName= :userName",{sess={value=session.sessionId,cfSqlType="cf_sql_varchar"},
-							  	 				  						   emailId={value=arguments.emailOrUserName,cfSqlType="cf_sql_varchar"},
-								  	 			 						   userName={value=arguments.emailOrUserName,cfSqlType="cf_sql_varchar"}});
+							  	 				  OR UserName= :userName",
+							  	 				  {sess={value=session.sessionId,cfSqlType="cf_sql_varchar"},
+							  	 				   emailId={value=arguments.emailOrUserName,cfSqlType="cf_sql_varchar"},
+								  	 			   userName={value=arguments.emailOrUserName,cfSqlType="cf_sql_varchar"}});
 
 
 					collectUserDetails=queryExecute("SELECT AccountId,UserName,ImagePath,PasswordHash
@@ -46,20 +58,25 @@ component accessors="true"{
 				}
 			}
 		catch(any exception){
-				writeLog(type="Error", file="coldboxLoginUser", text=" Exception type=#exception.type# ,Exception Message=#exception.message#");
+				writeLog(type="Error", file="my_colbox_application", text=" Exception type=#exception.type# ,
+																			Exception Message=#exception.message#");
 				login=false;
 		}
 
 		return login;
     } /*End of loginUser()*/
 
-	/*function for logout User*/
-	public boolean function logoutUser(){
+
+	public boolean function logoutUser()
+	description="function for logout User" hint="logout user"
+	{
 			var logout=false;
 			try{
 					clearSession=queryExecute("UPDATE AccountDetails
 											   SET SessionId=NULL
-											   WHERE AccountId= :accId",{accId={value="#Session.loggedInUser.userId#",cfSqlType="cf_sql_integer"}});
+											   WHERE AccountId= :accId",
+											   {accId={value="#Session.loggedInUser.userId#",cfSqlType="cf_sql_integer"}});
+
 					structDelete(session,"loggedInUser");
 					structDelete(cookie,CFID);
 					structDelete(cookie,CFTOKEN);
@@ -67,7 +84,8 @@ component accessors="true"{
 
 				}
 			catch(any exception){
-				writeLog(type="Error", file="coldboxLogoutUser", text=" Exception type=#exception.type# ,Exception Message=#exception.message#");
+				writeLog(type="Error", file="my_colbox_application", text=" Exception type=#exception.type# ,
+																			Exception Message=#exception.message#");
 				logout=false;
 			}
 

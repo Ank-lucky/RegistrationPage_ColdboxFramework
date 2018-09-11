@@ -1,4 +1,10 @@
-﻿component{
+﻿/*----------------------------------------------------------------------------->
+<!--- Component :  Coldbox.cfm --->
+<!--- Author 	 :	Ankita Rath --->
+<!--- Date     :	September 11, 2018 --->
+<!--- Description : coldbox application configuration component --->
+<!-----------------------------------------------------------------------------*/
+component{
 
 	// Configure ColdBox Application
 	function configure(){

@@ -1,0 +1,13 @@
+/*-----------------------------------------------------------------------------*/
+/*--- Style : successPageStyle.css ---*/
+/*--- Author 	 :	Ankita Rath ---*/
+/*--- Date     :	September 11, 2018 ---*/
+/*--- Description : style page for login and sign Up success Pages --*/
+/*-----------------------------------------------------------------------------*/
+
+body{
+	background-image:url(../images/background.png);
+}
+.mainContainer{
+	text-align:center;
+}

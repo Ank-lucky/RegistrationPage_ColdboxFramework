@@ -1,3 +1,9 @@
+/*-----------------------------------------------------------------------------*/
+/*--- Style : loginAndSignUpStyle.css ---*/
+/*--- Author 	 :	Ankita Rath ---*/
+/*--- Date     :	September 11, 2018 ---*/
+/*--- Description : style page for login and sign Up index page--*/
+/*-----------------------------------------------------------------------------*/
 
 .input-field label{color:#999;}
 .input-field input[type=text]:focus + label,.input-field input[type=password]:focus + label{color:#000;}
@@ -5,9 +11,10 @@
 .input-field input[type=text].valid,.input-field input[type=password].valid{border-bottom:1px solid #2196F3;box-shadow:0 1px 0 0 #2196F3;}
 .input-field input[type=text].invalid,.input-field input[type=password].invalid{border-bottom:1px solid #F44336;box-shadow:0 1px 0 0 #F44336;}
 .input-field .prefix.active{color:#000;}
+
 select{display:block; border: 2px solid #85a3d8;; border-radius: 5px;}
-.ErrorMsg{font-size:1em;color:#ff0000;}
-.goToLoginFormLink{font-size:1.2em;}
+.ErrorMsg{font-size:1em;color:#ff0000;margin-left:2%;}
+.goToLoginFormLink{font-size:1.2em;margin-left:2%;}
 /* Input : switch */
 .switch{margin-top:7px;}
 .switch label .lever{margin:0 7px;}
@@ -15,13 +22,33 @@ select{display:block; border: 2px solid #85a3d8;; border-radius: 5px;}
 .switch label input[type="checkbox"]:checked + .lever::after{background-color: #4FB0FD ;}
 .login-body{background-image:url('../images/background.png');background-size:cover;background-position: center;background-attachment:fixed;}
 .input-cart{min-height:400px;border-top:3px solid #2196F3;margin-top:80px;margin-bottom:100px;}
-.login{margin-top:25px;border-right:1px solid #ddd;}
+.login{margin-top:25px;
+/*border-right:1px solid #ddd;*/
+}
 .policy{visibility: hidden;}
 .signupForm{display: none;}
-.signup{margin-top:25px;}
-.signup-toggle{cursor:pointer;margin-top:140px;}
+.signup{/*margin-top:25px;*/}
+.signup-toggle{cursor:pointer;margin-top:80px;}
 .login h4, .signup h4{font-weight:200;}
 .legal{border-top:1px solid #ddd;}
 .email label{margin-left:11px;}
 .policy{font-size:13px;}
 .main-title{font-family:pacifico;}
+@media only screen and (min-width: 601px) {
+  .row .col.m7 {
+    width: 85%;
+  }
+}
+@media only screen and (min-width: 601px){
+.row .col.m5{
+	width:50%;
+	margin-left:20%;
+	margin-right:20%;
+}
+}
+.row:after {
+	    padding-top: 2%;
+}
+ .input-field input[type=text],input[type=date],input[type=password]{
+ 	margin:0;
+ }

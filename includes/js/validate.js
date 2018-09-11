@@ -1,4 +1,10 @@
-
+/*-----------------------------------------------------------------------------*/
+/*--- javascript : validate.js ---*/
+/*--- Author 	 :	Ankita Rath ---*/
+/*--- Date     :	September 11, 2018 ---*/
+/*--- Description : Js page for client side validation for login and 
+ * 					signup form--*/
+/*-----------------------------------------------------------------------------*/
 
 var result;
 var firstBlankField = true;
@@ -22,7 +28,6 @@ function validate() {
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
     var confrmPassword = document.getElementById('confrmPassword').value;
-   
 
     var date= new Date(dob);
     var today=new Date();
@@ -81,7 +86,7 @@ function validate() {
         displayErrors("showErrorUserName", "userName", 0, this.firstBlankField);
         filled[3] = false;
 
-    } else if (userName.length < 3 || userName.length >=20 ) {
+    } else if (userName.length < 3 || userName.length >20 ) {
         displayErrors("showErrorUserName", "userName", 1, this.firstBlankField);
         filled[3] = false;
     } else {
@@ -202,6 +207,47 @@ function validate() {
     }
 
     return this.flag;
+}
+function vL(){
+	console.log("validateLogin");
+	return false;
+}
+function validateLogin(){
+	var loginSuccess=true;
+    var loginUserNameOrEmail=document.getElementById('login').value;
+    var loginPasskey=document.getElementById('passkey').value;
+    
+    var regexEmail = /[\w.]+@+[a-z]+\.+[com|net|in]/;
+    var regexName = /^[A-Za-z]*$/;
+    var regexPasskey = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*])[A-Za-z\d$@$!%*]{8,}$/;
+
+    if (loginUserNameOrEmail == "") {
+       document.getElementById("showErrorLoginUserName").innerHTML = "Enter a valid Email/username";
+       loginSuccess = false;
+    } else if (loginUserNameOrEmail.length < 3 || loginUserNameOrEmail.length > 30 ) {
+    	 document.getElementById("showErrorLoginUserName").innerHTML = "Enter a valid Email/username";
+        loginSuccess = false;
+    } 
+    else if (!(regexEmail.test(loginUserNameOrEmail)||regexName.test(loginUserNameOrEmail))){
+    	 document.getElementById("showErrorLoginUserName").innerHTML = "Enter a valid Email/username";
+        loginSuccess = false;
+    }
+    else {
+        clearErrorDisplayed('showErrorLoginUserName');
+        loginSuccess = true;
+    }
+    
+    if(loginPasskey == ""){
+    	document.getElementById("showErrorLoginPasskey").innerHTML = "Enter a valid Password";
+        loginSuccess = false;
+    }
+    else{
+    	clearErrorDisplayed('showErrorLoginPasskey');
+        loginSuccess = true;
+    }
+    
+    return loginSuccess;
+    
 }
 
 /*displayErrors will display the errors according to the 

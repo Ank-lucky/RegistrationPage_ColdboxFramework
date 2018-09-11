@@ -1,11 +1,8 @@
 ﻿<!-----------------------------------------------------------------------
-********************************************************************************
-Copyright Since 2005 ColdBox Framework by Luis Majano and Ortus Solutions, Corp
-www.coldbox.org | www.luismajano.com | www.ortussolutions.com
-********************************************************************************
-Author 	 :	Luis Majano
-Description :
-	Your WireBox Configuration Binder
+<!--- Component :  Wirebox.cfc --->
+<!--- Author 	 :	Ankita Rath --->
+<!--- Date     :	September 11, 2018 --->
+<!--- Description :WireBox Configuration Binder --->
 ----------------------------------------------------------------------->
 <cfcomponent output="false" hint="The default WireBox Injector configuration object" extends="coldbox.system.ioc.config.Binder">
 <cfscript>
@@ -54,6 +51,8 @@ Description :
 		map("loginService").to("models.Login").asSingleton().noInit();
 		map("signUpService").to("models.SignUp").asSingleton().noInit();
 		map("lockSimultaneousUserLoginService").to("models.LockSimultaneousUserLogin").asSingleton().noInit();
+		map("loginServerSideValidation").to("models.LoginServerSideValidation").asSingleton().noInit();
+		map("signUpValidationService").to("models.SignUpServerSideValidation").asSingleton().noInit();
 	}
 </cfscript>
 </cfcomponent>

@@ -1,3 +1,10 @@
+<!------------------------------------------------------------------------------->
+<!--- Template : Main.json --->
+<!--- Author 	 :	Ankita Rath --->
+<!--- Date     :	September 11, 2018 --->
+<!--- Description : Main layout for rendering views--->
+<!-------------------------------------------------------------------------------->
+
 <cfoutput>
 <!DOCTYPE html>
 <html lang="en">

@@ -1,3 +1,9 @@
+/*-----------------------------------------------------------------------------*/
+/*--- javascript : fetchCountriesStates.js ---*/
+/*--- Author 	 :	Ankita Rath ---*/
+/*--- Date     :	September 11, 2018 ---*/
+/*--- Description : Js page for fetching country,state and city--*/
+/*-----------------------------------------------------------------------------*/
 $('document').ready(()=>{
 
 	/*fetch country list*/
