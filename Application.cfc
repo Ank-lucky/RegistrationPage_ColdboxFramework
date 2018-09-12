@@ -37,7 +37,6 @@ component{
 
 	// request start
 	public boolean function onRequestStart( string targetPage ){
-
 		application.cbBootstrap.onRequestStart( arguments.targetPage );
 		return true;
 	}

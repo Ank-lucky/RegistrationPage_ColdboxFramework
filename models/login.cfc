@@ -49,7 +49,8 @@ component displayname="loginOrLogoutUserComponent" accessors=true{
 
 				} // transaction ends
 					if(collectUserDetails.recordCount == 1){
-						session.loggedInUser={'userName'=collectUserDetails.UserName,'isUserLoggedIn'=true,'userId'=collectUserDetails.AccountId};
+						session.loggedInUser={'userName'=collectUserDetails.UserName,
+											  'isUserLoggedIn'=true,'userId'=collectUserDetails.AccountId};
 						login=true;
 					}
 					else{

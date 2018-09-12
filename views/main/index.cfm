@@ -9,7 +9,10 @@
 <cfif structKeyExists(rc,"login")>
 	<cfif arrayLen("#rc.validateLogin#")>
 		<cfloop from="1" to="#arrayLen(rc.validateLogin)#"	index="i">
-			<body style="margin-top:4%;text-align:center;color:green">
+			<head>
+				<link  rel='stylesheet' href='includes/css/errorMsgStyle.css'>
+			</head>
+			<body>
 			<cfoutput>#rc.validateLogin[i]#</cfoutput>
 			<br>
 			</body>
@@ -19,7 +22,10 @@
 <cfif structKeyExists(rc,"signUp")>
 <cfif arrayLen("#rc.validate#")>
 			<cfloop from="1" to="#arrayLen(rc.validate)#"	index="i">
-				<body style="margin-bottom:4%;text-align:center;color:green">
+				<head>
+				<link  rel='stylesheet' href='includes/css/errorMsgStyle.css'>
+				</head>
+				<body>
 				<cfoutput>#rc.validate[i]#</cfoutput>
 				<br>
 			</body>
